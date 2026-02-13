@@ -1,5 +1,5 @@
 import express from "express";
-import line from "@line/bot-sdk";
+import * as line from "@line/bot-sdk";
 
 const app = express();
 
