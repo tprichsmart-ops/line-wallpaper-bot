@@ -35,10 +35,37 @@ const keywordMap = {
   }
 };
 
-// 同義詞
+// ===============================
+// 同義詞（依你指定）
+// ===============================
 const alias = {
+  // 成功
+  "勝利": "成功",
+  "達標": "成功",
+  "突破": "成功",
+  "上榜": "成功",
+  "升遷": "成功",
+  "升官": "成功",
+
+  // 業績
+  "成交": "業績",
+  "爆單": "業績",
+  "接案": "業績",
+
+  // 有錢
   "賺錢": "有錢",
-  "發財": "有錢"
+  "發財": "有錢",
+  "中獎": "有錢",
+  "賺大錢": "有錢",
+
+  // 好運
+  "幸運": "好運",
+  "好事": "好運",
+  "開運": "好運",
+  "轉運": "好運",
+  "吉": "好運",
+  "大吉": "好運",
+  "順利": "好運"
 };
 
 function normalize(text) {
@@ -63,7 +90,7 @@ app.get("/", (req, res) => {
 });
 
 // ===============================
-// 多帳號支援核心邏輯
+// 多帳號支援
 // ===============================
 
 function makeConfig(prefix) {
@@ -87,18 +114,8 @@ async function handleEvent(event, client) {
   const key = normalize(event.message.text);
   const hit = keywordMap[key];
 
-  if (!hit) {
-    await client.replyMessage({
-      replyToken: event.replyToken,
-      messages: [
-        {
-          type: "text",
-          text: "請輸入：成功 / 業績 / 有錢 / 好運 🎊"
-        }
-      ]
-    });
-    return;
-  }
+  // ❌ 沒命中關鍵字就完全不回
+  if (!hit) return;
 
   const imageUrl = makeImageUrl(hit.file);
 
@@ -118,7 +135,6 @@ async function handleEvent(event, client) {
 function mountWebhook(path, prefix) {
   const config = makeConfig(prefix);
 
-  // 若未設定密鑰，不讓程式崩潰
   if (!config.channelSecret || !config.channelAccessToken) {
     app.post(path, express.json(), (req, res) => {
       res.status(200).send(
