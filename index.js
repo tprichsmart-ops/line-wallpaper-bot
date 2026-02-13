@@ -23,10 +23,10 @@ function imageUrl(req, filename) {
 }
 
 const keywordMap = {
-  "成功": { file: "success.png", text: "🎉 成功模式啟動！送你桌布～" },
-  "業績": { file: "sales.png", text: "📈 業績起飛！送你桌布～" },
-  "有錢": { file: "rich.png", text: "💰 有錢有閒有福氣！送你桌布～" },
-  "好運": { file: "luck.png", text: "🍀 好運黏上身！送你桌布～" }
+  "成功": { file: "success.png", text: "🏆 成功模式啟動中。\n不急著衝刺，但每一步都算數。" },
+  "業績": { file: "sales.png", text: "📈 進度條幫你偷偷往前推一格。\n今年努力有回音，辛苦也值得。" },
+  "有錢": { file: "rich.png", text: "💰 財氣已幫你放進口袋。\n願今年進帳穩穩來，也能留點時間給自己。" },
+  "好運": { file: "luck.png", text: "🍀 好消息正在路上。\n願今年多一點驚喜，少一點驚嚇 😄" }
 };
 
 const alias = {
